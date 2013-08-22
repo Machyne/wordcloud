@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+    
+    <title>Word Cloud</title>
+    
+    <%= stylesheet_link_tag "words" %>
+    <%= javascript_include_tag "application" %>
+</head>
+<body>
+    <div><!-- row -->
+        <div id="unproc-container">
+            <div>
+                <label class="above" for="unprocessed">Enter your text</label>
+                <textarea id="unprocessed" rows="22" cols="62"></textarea>
+            </div>
+            <div>
+                <label for="file-uploader">Upload files</label>
+                <input type="file" id="file-uploader" name="files[]" multiple title="Uploader"/>
+                <button id="clear-button">Clear All Text</button>
+            </div>
+            <p>Tip: drag and drop a file to load it in!</p>
+            <div class="fwc">
+                <button id="cloud-go">Create the word cloud!</button>
+            </div>
+        </div>
+        <div id="cloud"></div>
+    </div>
+</body>
+</html>

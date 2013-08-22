@@ -1,0 +1,32 @@
+body{
+    color: #000;
+    background-color: #aaa;
+}
+
+#unproc-container{
+    display: inline-block;
+    width: 40%;
+    label{
+        &:after{
+            content: ": ";
+        }
+        .above{
+            display: block;
+        }
+    }
+    textarea#unprocessed{
+        display: block;
+    }
+    input[type='file'] {
+      width: 95px;
+    }
+}
+#cloud{
+    margin-left: 20px;
+    display: inline-block;
+    border: solid 1px #fff
+}
+.fwc{
+    width: 100%;
+    text-align: center;
+}

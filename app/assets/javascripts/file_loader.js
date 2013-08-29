@@ -22,6 +22,8 @@ function errorHandler(evt) {
 }
 
 $(document).ready(function() {
+  $('#loading').toggle(false);
+
   // Load file on drop.
   var unproc = $('#unproc-container');
   unproc.on('dragenter', preventThings);
@@ -49,6 +51,15 @@ $(document).ready(function() {
   // Clear the textarea when the clear button is pressed
   $('#clear-button').on('click', function(){
     $('#unprocessed').val('');
+  });
+
+  // Process the textarea value when the preprocess button is pressed
+  $('#preprocess-button').on('click', function(){
+    var current = $('#unprocessed').val();
+    $('#loading').toggle(true);
+    $.ajax({url: '/preprocess', data: {text: current}, type: 'POST', dataType: 'json',
+      success: function(d){$('#unprocessed').val(d.text); $('#loading').toggle(false);}
+    });
   });
 
 });

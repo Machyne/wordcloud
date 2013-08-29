@@ -16,6 +16,7 @@
                 <label class="above" for="unprocessed">Enter your text</label>
                 <textarea id="unprocessed" rows="22" cols="62"></textarea>
             </div>
+            <span id="loading">Loading...</span>
             <div>
                 <label for="file-uploader">Upload files</label>
                 <input type="file" id="file-uploader" name="files[]" multiple title="Uploader"/>
@@ -23,6 +24,8 @@
             </div>
             <p>Tip: drag and drop a file to load it in!</p>
             <div class="fwc">
+                <button id="preprocess-button">Preprocess the text!</button>
+                &nbsp;
                 <button id="cloud-go">Create the word cloud!</button>
             </div>
         </div>

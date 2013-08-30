@@ -53,7 +53,21 @@ $(document).ready(function() {
     $('#unprocessed').val('');
   });
 
-
+  // Append the desired page to textarea value when the load page button is pressed
+  $('#load-page-button').on('click', function(){
+    var current = $('#unprocessed').val();
+    $('#loading').toggle(true);
+    $.ajax({url:'/load', data:{url:$('#page-url').val()}, type: 'GET',
+      success: function(data, textStatus, jqXHR){
+        $('#unprocessed').val($('#unprocessed').val()+data);
+        $('#loading').toggle(false);
+      },
+      error: function() {
+        alert('fail');
+        $('#loading').toggle(false);
+      }
+    });
+  });
 
   // Process the textarea value when the preprocess button is pressed
   $('#preprocess-button').on('click', function(){
@@ -62,6 +76,10 @@ $(document).ready(function() {
     $.ajax({url: '/preprocess', data: {text: current}, type: 'POST', dataType: 'json',
       success: function(data, textStatus, jqXHR){
         $('#unprocessed').val(data.text);
+        $('#loading').toggle(false);
+      },
+      error: function() {
+        alert('fail');
         $('#loading').toggle(false);
       }
     });

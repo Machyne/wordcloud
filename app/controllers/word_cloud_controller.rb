@@ -1,8 +1,15 @@
 class WordCloudController < ApplicationController
   require "lemmatizer"
+  require "open-uri"
+  require "nokogiri"
 
   def index
     render action: 'index.html.erb', :handlers => [:erb]
+  end
+
+  def urlget
+    doc = Nokogiri::HTML(open(params[:url]))
+    render text: doc.to_s.html_safe
   end
 
   skip_before_filter :verify_authenticity_token  

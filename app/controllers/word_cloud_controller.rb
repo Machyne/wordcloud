@@ -5,6 +5,7 @@ class WordCloudController < ApplicationController
     render action: 'index.html.erb', :handlers => [:erb]
   end
 
+  skip_before_filter :verify_authenticity_token  
   def preprocess
     text = params[:text]
     bad_tags = /<(link|script|style)[^>]*>(.|\n)*?(<\/\1\s*>)/i

@@ -5,21 +5,21 @@ function loadText(readFile) {
   reader.onprogress = doNothing;
   reader.onload = loaded(readFile.name);
   reader.onerror = errorHandler;
-}
+};
 
-function doNothing(evt) {  }
+function doNothing(evt) {};
 function loaded(fname) {  
   return function(evt){
     // Obtain the read file data    
     var fileString = evt.target.result;
     $('#unprocessed').val($('#unprocessed').val()+'\n'+fileString);
-  }
-}
+  };
+};
 function errorHandler(evt) {
   if(evt.target.error.name == "NotReadableError") {
-    alert('Could not load file.')
-  }
-}
+    alert('Could not load file.');
+  };
+};
 
 $(document).ready(function() {
   $('#loading').toggle(false);
@@ -36,7 +36,7 @@ $(document).ready(function() {
   function preventThings(e){
     e.preventDefault();
     e.stopPropagation();
-  }
+  };
 
   // Load file when picked with the uploader
   $('#file-uploader').change(function(evt){
@@ -53,12 +53,17 @@ $(document).ready(function() {
     $('#unprocessed').val('');
   });
 
+
+
   // Process the textarea value when the preprocess button is pressed
   $('#preprocess-button').on('click', function(){
     var current = $('#unprocessed').val();
     $('#loading').toggle(true);
     $.ajax({url: '/preprocess', data: {text: current}, type: 'POST', dataType: 'json',
-      success: function(d){$('#unprocessed').val(d.text); $('#loading').toggle(false);}
+      success: function(data, textStatus, jqXHR){
+        $('#unprocessed').val(data.text);
+        $('#loading').toggle(false);
+      }
     });
   });
 

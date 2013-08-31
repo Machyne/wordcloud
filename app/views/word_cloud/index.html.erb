@@ -25,7 +25,7 @@
             <p>Tip: drag and drop a file to load it in!</p>
             <div>
                 <span>Load from url:</span>
-                <input id="page-url" type="text" />
+                <input id="page-url" type="text" value="http://www.w3schools.com/"/>
                 <button id="load-page-button">Load</button>
             </div>
             <div class="fwc">
@@ -35,6 +35,43 @@
             </div>
         </div>
         <div id="cloud"></div>
+        <div id="aesthetics">
+            <div>
+                <label for="font-input">Font</label>
+                <input id="font-input" type="text" value="sans serif" />
+            </div>
+            <div>
+                <span>Dimmensions</span>
+                <label for="dim-w">W</label>
+                <input id="dim-w" type="number" value="400" />
+                <span>&times;</span>
+                <label for="dim-h">H</label>
+                <input id="dim-h" type="number" value="400" />
+            </div>
+            <div>
+                <label for="color-picker">Colors</label>
+                <input id="color-picker" type="color" value="rgb(128,0,0);" />
+                <button id="add-color">Add</button>
+            <div>
+            <div id="color-list">
+                <p style="color:#ffffff">
+                    Color <span>#ffffff</span>
+                    <a onclick="removeColor()" title="Remove This Color">&times;</a>
+                </p>
+                <p style="color:#ff0000">
+                    Color <span>#ff0000</span>
+                    <a onclick="removeColor()" title="Remove This Color">&times;</a>
+                </p>
+                <p style="color:#00ff00">
+                    Color <span>#00ff00</span>
+                    <a onclick="removeColor()" title="Remove This Color">&times;</a>
+                </p>
+                <p style="color:#0000ff">
+                    Color <span>#0000ff</span>
+                    <a onclick="removeColor()" title="Remove This Color">&times;</a>
+                </p>
+            </div>
+        </div>
     </div>
 </body>
 </html>

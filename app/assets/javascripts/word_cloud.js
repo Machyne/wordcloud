@@ -11,15 +11,22 @@ var getWordHash = function(){
 }();
 
 function getFont(){
-    return 'Open Sans';
+    return $("#font-input").val ();
 }
 
+function removeColor() {
+    var p = $(event.currentTarget).parent();
+    p.fadeOut(600);
+    window.setTimeout(function(){p.remove();}, 600);
+    event.cancelBubble = true;
+    if (event.stopPropagation) { event.stopPropagation() };
+}
 function getColors(){
-    return ['#fff','#f00','#0f0','#00f'];
+    return $("#color-list p span").text().split('#').slice(1).map(function(c){return '#'.concat(c);});
 }
 
 function getWCSize(){
-    return [400, 400];
+    return [parseInt($("#dim-w").val()), parseInt($("#dim-h").val())];
 }
 
 
@@ -60,8 +67,13 @@ $(window).ready(function (argument) {
           .on("end", draw)
           .start();
     };
-    $("#unprocessed").val('welcome to my word cloud generator! words words words in a cloud')
-    window.setTimeout(renderCloud, 200);
+    $("#unprocessed").val('Welcome to my word cloud generator!')
+
+    $("#add-color").on('click',function(){
+        var col = $("#color-picker").val();
+        var c = "<p style='color:"+col+"'>Color <span>"+col+"</span> <a onclick='removeColor()' title='Remove This Color'>&times;</a></p>";
+        $("#color-list").append(c);
+    });
 
     $("#cloud-go").on('click', renderCloud);
 });

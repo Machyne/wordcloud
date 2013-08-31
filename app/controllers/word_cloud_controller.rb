@@ -36,7 +36,11 @@ class WordCloudController < ApplicationController
     words = words.map do |w|
       lem.lemma w
     end
-    render json: {text: words.join(' ')}
+    hash = {}
+    words.each do |w|
+      hash[w] = (hash[w]||0)+1
+    end
+    render json: {text: words.join(' '), hash: hash}
   end
 
   private

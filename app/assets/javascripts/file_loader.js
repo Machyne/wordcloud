@@ -72,11 +72,14 @@ $(document).ready(function() {
   // Process the textarea value when the preprocess button is pressed
   $('#preprocess-button').on('click', function(){
     var current = $('#unprocessed').val();
+    $('#cloud-go').attr('disabled', 'disabled');
     $('#loading').toggle(true);
     $.ajax({url: '/preprocess', data: {text: current}, type: 'POST', dataType: 'json',
       success: function(data, textStatus, jqXHR){
         $('#unprocessed').val(data.text);
         $('#loading').toggle(false);
+        getWordHash(data.hash);
+        $('#cloud-go').removeAttr('disabled');
       },
       error: function() {
         alert('fail');

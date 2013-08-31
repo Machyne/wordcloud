@@ -2,19 +2,13 @@
 var renderCloud;
 var sizeScaleFactor = 12;
 
-function getWordHash(){
-    var text = $("#unprocessed").val();
-    text = text.split(' ');
-    var obj = {};
-    for (var i = 0; i < text.length; i++) {
-        if(obj[text[i]]){
-            obj[text[i]]++;
-        } else{
-            obj[text[i]]=1;
-        };
+var getWordHash = function(){
+    var hash = {};
+    return function(h){
+      if(h) hash=h;
+      else return hash;
     };
-    return obj;
-}
+}();
 
 function getFont(){
     return 'Open Sans';

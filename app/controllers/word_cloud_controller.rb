@@ -2,6 +2,7 @@ class WordCloudController < ApplicationController
   require "lemmatizer"
   require "open-uri"
   require "nokogiri"
+  require "prawn"
 
   def index
     render action: 'index.html.erb', :handlers => [:erb]
@@ -10,6 +11,19 @@ class WordCloudController < ApplicationController
   def urlget
     doc = Nokogiri::HTML(open(params[:url]))
     render text: doc.to_s.html_safe
+  end
+
+  class TestDocument < Prawn::Document
+    def to_pdf
+      text "Hello World!"
+      render
+    end
+  end
+
+  skip_before_filter :verify_authenticity_token
+  def export
+    output = TestDocument.new.to_pdf
+    send_data output, :filename => "hello.pdf", :type => "application/pdf", :disposition => "inline"
   end
 
   skip_before_filter :verify_authenticity_token  

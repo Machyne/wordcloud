@@ -15,6 +15,7 @@ gem 'turbolinks', '1.1.1'
 gem 'jbuilder', '1.0.2'
 gem 'lemmatizer', '0.1.0'
 gem 'nokogiri', '1.6.0'
+gem 'prawn', '0.12.0'
 
 group :doc do
   gem 'sdoc', '0.3.20', require: false

@@ -11,7 +11,7 @@ var getWordHash = function(){
 }();
 
 function getFont(){
-    return $("#font-input").val ();
+    return $('#font-input').val();
 }
 
 function removeColor() {
@@ -22,58 +22,87 @@ function removeColor() {
     if (event.stopPropagation) { event.stopPropagation() };
 }
 function getColors(){
-    return $("#color-list p span").text().split('#').slice(1).map(function(c){return '#'.concat(c);});
+    return $('#color-list p span').text().split('#').slice(1).map(function(c){return '#'.concat(c);});
 }
 
 function getWCSize(){
-    return [parseInt($("#dim-w").val()), parseInt($("#dim-h").val())];
+    return [parseInt($('#dim-w').val()), parseInt($('#dim-h').val())];
 }
 
+// Result:       {word}++{word}++...
+// {word}      = {*text},{style},{transform}
+// {style}     = {*color}|{*font size}
+// {transform} = {*x}|{*y}|{*rotation in degrees}
+//
+function prepareForm() {
+  $('#export-form-dim').val(getWCSize().join('x'));
+  $('#export-form-font').val(getFont());
+  var allWords = [];
+  $('svg g text').each(function(){
+    var styleVal = this.attributes[1].value;
+    styleVal = styleVal.split(';');
+    styleVal = styleVal[0].split(': ')[1] + '|' + styleVal[2].split(': ')[1];
+    var transformVal = this.attributes[2].value;
+    transformVal = transformVal.match(/-?\d+/g);
+    transformVal[2] = transformVal[2]||'0';
+    transformVal = transformVal.join('|');
+    var contentVal = this.textContent;
+    allWords.push(contentVal.concat(',', styleVal, ',', transformVal));
+   });
+  $('#export-form-wordCloud').val(allWords.join('++'));
+  $('#export').removeAttr('disabled');
+};
 
 
 $(window).ready(function (argument) {
     function draw(data) {
         var w = getWCSize()[0]
         var h = getWCSize()[1]
-        var couldDiv = d3.select("#cloud")
-                         .append("svg")
-                         .attr("width",w)
-                         .attr("height",h)
-                         .append("g")
-                         .attr("transform","translate("+(w/2).toString()+","+(h/2).toString()+")")
-                         .selectAll("text")
+        var couldDiv = d3.select('#cloud')
+                         .append('svg')
+                         .style('background-color',$('#bg-color-picker').val())
+                         .attr('width',w)
+                         .attr('height',h)
+                         .append('g')
+                         .attr('transform','translate('+(w/2).toString()+','+(h/2).toString()+')')
+                         .selectAll('text')
                          .data(data);
         var colors = getColors();
         var clen = colors.length
-        couldDiv.enter().append("text")
-                .style("fill",function(data){var i = ~~(Math.random() * clen); return colors[i];})
-                .attr("text-anchor","middle")
+        couldDiv.enter().append('text')
+                .style('fill',function(data){var i = ~~(Math.random() * clen); return colors[i];})
+                .attr('text-anchor','middle')
                 .text(function(data){return data.text;})
                 .transition().duration(1000)
-                .style("font-size",function(data){return (data.size)+"px";})
-                .style("font-family",getFont())
-                .attr("transform",function(data){return"translate("+[data.x,data.y]+")rotate("+data.rotate+")";});
+                .style('font-size',function(data){return (data.size)+'px';})
+                .style('font-family',getFont())
+                .attr('transform',function(data){return'translate('+[data.x,data.y]+')rotate('+data.rotate+')';});
+      window.setTimeout(prepareForm,1500);
      };
 
     renderCloud = function () {
         var wordHash = getWordHash();
-        $("#cloud").html('');
+        $('#cloud').html('');
         d3.layout.cloud().size(getWCSize())
           .words(Object.keys(wordHash))
           .text(function (d) { return d; })
           .font(getFont())
           .rotate(function() { return (~~(Math.random() * 3)-1) * 90; })
           .fontSize(function(d) { return wordHash[d]*sizeScaleFactor; })
-          .on("end", draw)
+          .on('end', draw)
           .start();
     };
-    $("#unprocessed").val('Welcome to my word cloud generator!')
+    $('#unprocessed').val('Welcome to my word cloud generator!')
 
-    $("#add-color").on('click',function(){
-        var col = $("#color-picker").val();
-        var c = "<p style='color:"+col+"'>Color <span>"+col+"</span> <a onclick='removeColor()' title='Remove This Color'>&times;</a></p>";
-        $("#color-list").append(c);
+    $('#add-color').on('click',function(){
+        var col = $('#color-picker').val();
+        var c = "<p class='color-"+col.substr(1)+"' style='color:"+col+"'>Color <span>"+col+"</span> <a onclick='removeColor()' title='Remove This Color'>&times;</a></p>";
+        $('#color-list').append(c);
+        $('html, body').animate({
+          scrollBottom: $('.color-'.concat(col.substr(1))).offset().bottom
+        }, 600);
     });
 
-    $("#cloud-go").on('click', renderCloud);
+    $('#cloud-go').on('click', renderCloud);
 });
+var yolo;

@@ -24,7 +24,12 @@ label{
 #cloud{
     margin-left: 20px;
     display: inline-block;
-    border: solid 1px #fff
+    border: solid 1px #fff;
+    padding: 0;
+    svg{
+        margin: 0;
+        padding: 0;
+    }
 }
 #aesthetics{
     #color-list{

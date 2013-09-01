@@ -13,7 +13,7 @@ class WordCloudController < ApplicationController
     render text: doc.to_s.html_safe
   end
 
-  class TestDocument < Prawn::Document
+  class WCDocument < Prawn::Document
     def to_pdf
       text "Hello World!"
       render
@@ -22,8 +22,8 @@ class WordCloudController < ApplicationController
 
   skip_before_filter :verify_authenticity_token
   def export
-    output = TestDocument.new.to_pdf
-    send_data output, :filename => "hello.pdf", :type => "application/pdf", :disposition => "inline"
+    output = WCDocument.new.to_pdf
+    send_data output, :filename => "Word Cloud.pdf", :type => "application/pdf", :disposition => "inline"
   end
 
   skip_before_filter :verify_authenticity_token  

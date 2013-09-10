@@ -32,7 +32,7 @@ class WordCloudController < ApplicationController
       color, fontSize = styleTemp.split "|"
       fontSize = Integer(fontSize[/\d+/])
       x, y, r = transformTemp.split "|"
-      r = 360 - r
+      r = 360 - Integer(r)
       pdf.fill_color color[1, 6]
       pdf.draw_text text, at: [Integer(x)+dim[0], dim[1]-Integer(y)], size: fontSize, rotate: r
     end

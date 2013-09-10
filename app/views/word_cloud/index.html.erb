@@ -29,14 +29,19 @@
                 <button id="load-page-button">Load</button>
             </div>
             <div class="fwc">
+                <label for="normalize">Normalize</label>
+                <input type="checkbox" id="normalize" value="normalize"/>
                 <button id="preprocess-button">Preprocess the text!</button>
+            </div>
+            <div class="fwc">
                 &nbsp;
                 <button id="cloud-go" disabled="disabled">Create the word cloud!</button>
                 &nbsp;
-                <form action="/export" method="post" >
+                <form action="/export" method="post">
                     <div style="margin:0;padding:0;display:inline;visibility:hidden">
                         <input id="export-form-dim" name="dim" type="hidden" value="" />
                         <input id="export-form-font" name="font" type="hidden" value="" />
+                        <input id="export-form-bgcol" name="bgcol" type="hidden" value="" />
                         <input id="export-form-wordCloud" name="wordCloud" type="hidden" value="" />
                     </div>
                     <input name="export" disabled="disabled" id="export" type="submit" value="Save as PDF" />
@@ -47,7 +52,7 @@
         <div id="aesthetics">
             <div>
                 <label for="font-input">Font</label>
-                <input id="font-input" type="text" value="sans serif" />
+                <input id="font-input" type="text" value="Sans Serif" />
             </div>
             <div>
                 <span>Dimmensions</span>

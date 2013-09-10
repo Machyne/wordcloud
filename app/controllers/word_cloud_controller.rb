@@ -13,17 +13,30 @@ class WordCloudController < ApplicationController
     render text: doc.to_s.html_safe
   end
 
-  class WCDocument < Prawn::Document
-    def to_pdf
-      text "Hello World!"
-      render
-    end
-  end
-
   skip_before_filter :verify_authenticity_token
   def export
-    output = WCDocument.new.to_pdf
-    send_data output, :filename => "Word Cloud.pdf", :type => "application/pdf", :disposition => "inline"
+    dim = params[:dim].split('x').map { |e| Integer(e) }
+    pdf = Prawn::Document.new(page_size: dim, margin: [0,0,0,0])
+    
+    pdf.fill_color params[:bgcol][1,6]
+    pdf.fill_rectangle [0, dim[1]], dim[0], dim[1]
+    
+    f = params[:font]
+    if fonts.include? f
+      pdf.font f
+    end
+
+    dim = [dim[0]/2, dim[1]/2]
+    params[:wordCloud].split("++").each do |w|
+      text, styleTemp, transformTemp = w.split ","
+      color, fontSize = styleTemp.split "|"
+      fontSize = Integer(fontSize[/\d+/])
+      x, y, r = transformTemp.split "|"
+      r = 360 - r
+      pdf.fill_color color[1, 6]
+      pdf.draw_text text, at: [Integer(x)+dim[0], dim[1]-Integer(y)], size: fontSize, rotate: r
+    end
+    send_data pdf.render, :filename => "Word Cloud.pdf", :type => "application/pdf", :disposition => "inline"
   end
 
   skip_before_filter :verify_authenticity_token  
@@ -54,10 +67,26 @@ class WordCloudController < ApplicationController
     words.each do |w|
       hash[w] = (hash[w]||0)+1
     end
+    if params[:normalize]
+      len = words.length
+      normal = 20
+      hash = hash.inject({}) do |h, (k,v)|
+        p k
+        h[k] = normal*v/len
+        h
+      end
+    end
     render json: {text: words.join(' '), hash: hash}
   end
 
   private
+  def fonts
+    ['Courier', 'Helvetica', 'Times-Roman', 'Symbol', 'ZapfDingbats',
+     'Courier-Bold', 'Courier-Oblique', 'Courier-BoldOblique',
+     'Times-Bold', 'Times-Italic', 'Times-BoldItalic',
+     'Helvetica-Bold', 'Helvetica-Oblique', 'Helvetica-BoldOblique']
+  end
+
   def stops
     ['a', 'about', 'above', 'accordingly', 'across', 'after',
      'afterwards', 'again', 'against', 'all', 'allows', 'almost',

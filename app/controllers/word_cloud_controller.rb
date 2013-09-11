@@ -22,9 +22,9 @@ class WordCloudController < ApplicationController
     pdf.fill_rectangle [0, dim[1]], dim[0], dim[1]
     
     f = params[:font]
-    if fonts.include? f
-      pdf.font f
-    end
+    # if fonts.include? f
+    #   pdf.font f
+    # end
 
     dim = [dim[0]/2, dim[1]/2]
     params[:wordCloud].split("++").each do |w|

@@ -45,13 +45,18 @@ function prepareForm() {
     styleVal = styleVal[0].split(': ')[1] + '|' + styleVal[2].split(': ')[1];
     var transformVal = this.attributes[2].value;
     transformVal = transformVal.match(/-?\d+/g);
+    transformVal[0] = parseInt(transformVal[0]);
+    transformVal[1] = parseInt(transformVal[1]);  
     transformVal[2] = transformVal[2]||'0';
     var w = this.clientWidth;
+    var h = this.clientHeight;
     if(transformVal[2]=='0' || transformVal[2]=='180'){
-      transformVal[0]-=Math.floor(w/2);
+      transformVal[0]+=1-Math.floor(w/2);
+      transformVal[1]+=1;
     }else if(transformVal[2]=='90'){
-      transformVal[0]-=Math.floor(w/2);
+      transformVal[1]-=Math.floor(w/2);
     }else if(transformVal[2]=='-90'){
+      transformVal[1]+=Math.floor(w/2);
     };
     transformVal = transformVal.join('|');
     var contentVal = this.textContent;
@@ -100,7 +105,7 @@ $(window).ready(function (argument) {
       .on('end', draw)
       .start();
   };
-  $('#unprocessed').val('Welcome to my word cloud generator!')
+  $('#unprocessed').val('Welcome to my word cloud generator! Preprocess the text, then generate the cloud.')
 
   $('#add-color').on('click',function(){
     var col = $('#color-picker').val();

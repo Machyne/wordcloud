@@ -69,12 +69,21 @@ $(document).ready(function() {
     });
   });
 
+  $('#normalize').on('click', function(){
+    var attr = $('#normal').attr('disabled');
+    if(typeof attr !== 'undefined' && attr !== false){
+      $('#normal').removeAttr('disabled');
+    }else{
+      $('#normal').attr('disabled', 'disabled');
+    };
+  });
+
   // Process the textarea value when the preprocess button is pressed
   $('#preprocess-button').on('click', function(){
     $('#cloud-go').attr('disabled', 'disabled');
     $('#loading').toggle(true);
-    var data = {text: $('#unprocessed').val()};
-    var norm = $("#normalize:checked");
+    var data = {text: $('#unprocessed').val(), normal: $('#normal').val()};
+    var norm = $('#normalize:checked');
     if(norm[0])data.normalize=true;
     $.ajax({url: '/preprocess', data: data, type: 'POST', dataType: 'json',
       success: function(data, textStatus, jqXHR){

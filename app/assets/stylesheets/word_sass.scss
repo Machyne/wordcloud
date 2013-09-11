@@ -3,6 +3,7 @@ $cntr-col: #C6D4E7;
 $text-col: #333;
 $cntr-margin: 10px;
 $cntr-pdg: 10px;
+$dsbld-text-col: lighten($text-col, 20%);
 
 body{
     color: $text-col;
@@ -18,6 +19,45 @@ label{
         display: block;
     }
 }
+
+input, button{
+    font-family: "Open Sans", "Sans Serif";
+    font-size: 0.9em;
+}
+
+input[type='submit'], input[type='color'], button{
+    border: 1px solid lighten($text-col, 30%);
+    background-color: $bg-col;
+    color: $text-col;
+    border-radius: 4px;
+    cursor: pointer;
+    &:hover{
+        background-color: saturate(lighten($bg-col, 10%),25%);
+        color: saturate(lighten($text-col, 10%),25%);
+    }
+    &:disabled{
+        cursor: default;
+        border: 1px solid transparent;
+        background-color: lighten($bg-col, 10%);
+        color: $dsbld-text-col;
+    }
+}
+
+input[type='number'] {
+    width: 3.7em;
+    text-align: right;
+    padding-right: 4px;
+    border: 1px solid lighten($text-col, 30%);
+    background-color: $bg-col;
+    border-radius: 4px;
+    color: $text-col;
+    &:disabled{
+        border: 1px solid transparent;
+        background-color: lighten($bg-col, 10%);
+        color: $dsbld-text-col;
+    }
+}
+
 #unproc-container{
     margin: $cntr-margin;
     padding: $cntr-pdg;
@@ -25,15 +65,26 @@ label{
     display: inline-block;
     width: 40%;
     textarea#unprocessed{
+        box-sizing: border-box;
+        color: $text-col;
+        border: 1px solid lighten($text-col, 30%);
+        background-color: lighten($cntr-col, 10%);
+        font-family: "Open Sans", "Sans Serif";
+        font-size: 1em;
         display: block;
+        width: 100%;
+        height: 20em;
+        resize: vertical;
     }
     input[type='file'] {
-      width: 95px;
+      width: 100px;
     }
 }
+
 form{
     display: inline;
 }
+
 #cloud{
     margin-left: 20px;
     display: inline-block;
@@ -44,24 +95,31 @@ form{
         padding: 0;
     }
 }
+
 #aesthetics{
     margin: $cntr-margin;
     padding: $cntr-pdg;
     background-color: $cntr-col;
     width: 70%;
+    div{
+        margin-bottom: 20px;
+    }
     #color-list{
         line-height: 1;
         p{
+            border: 1px solid lighten($text-col, 30%);
             width: 20%;
             padding: 4px;
             margin-top: 5px;
             margin-bottom: 5px;
             background-color: $bg-col;
+            text-shadow: -1px -1px darken($text-col,10%);
+            text-shadow:  1px  1px darken($text-col,10%);
         }
         a{
             float: right;
             cursor: pointer;
-            color: #444;
+            color: darken($text-col, 10%);
             text-decoration: none;
             &:hover{
                 text-decoration: none;
@@ -69,6 +127,7 @@ form{
         }
     }
 }
+
 .fwc{
     width: 100%;
     text-align: center;

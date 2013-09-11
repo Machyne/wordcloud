@@ -15,7 +15,7 @@
         <div id="unproc-container">
             <div>
                 <label class="above" for="unprocessed">Enter your text</label>
-                <textarea id="unprocessed" rows="22" cols="62"></textarea>
+                <textarea id="unprocessed"></textarea>
             </div>
             <span id="loading">Loading...</span>
             <div>
@@ -32,6 +32,8 @@
             <div>
                 <label for="normalize">Normalize</label>
                 <input type="checkbox" id="normalize" value="normalize"/>
+                <label for="normal">to</label>
+                <input id="normal" type="number" value="10" disabled="disabled" />
                 <button id="preprocess-button">Preprocess the text!</button>
             </div>
             <div class="fwc">
@@ -56,7 +58,7 @@
                 <input id="font-input" type="text" value="Helvetica" />
             </div>
             <div>
-                <span>Dimmensions</span>
+                <span>Dimmensions</span><br />
                 <label for="dim-w">W</label>
                 <input id="dim-w" type="number" value="600" />
                 <span>&times;</span>
@@ -64,27 +66,27 @@
                 <input id="dim-h" type="number" value="400" />
             </div>
             <div>
+                <label for="bg-color-picker">Background Color</label>
+                <input id="bg-color-picker" type="color" value="#000000" />
+                <br />
                 <label for="color-picker">Colors</label>
                 <input id="color-picker" type="color" value="#3BB077" />
                 <button id="add-color">Add</button>
-                &nbsp;|&nbsp;
-                <label for="bg-color-picker">Background Color</label>
-                <input id="bg-color-picker" type="color" value="#000000" />
+                <span id="color-list">
+                    <p class="color-ff0000" style="color:#ff0000">
+                        Color <span>#ff0000</span>
+                        <a onclick="removeColor()" title="Remove This Color">&times;</a>
+                    </p>
+                    <p class="color-00ff00" style="color:#00ff00">
+                        Color <span>#00ff00</span>
+                        <a onclick="removeColor()" title="Remove This Color">&times;</a>
+                    </p>
+                    <p class="color-0000ff" style="color:#0000ff">
+                        Color <span>#0000ff</span>
+                        <a onclick="removeColor()" title="Remove This Color">&times;</a>
+                    </p>
+                </span>
             <div>
-            <div id="color-list">
-                <p class="color-ff0000" style="color:#ff0000">
-                    Color <span>#ff0000</span>
-                    <a onclick="removeColor()" title="Remove This Color">&times;</a>
-                </p>
-                <p class="color-00ff00" style="color:#00ff00">
-                    Color <span>#00ff00</span>
-                    <a onclick="removeColor()" title="Remove This Color">&times;</a>
-                </p>
-                <p class="color-0000ff" style="color:#0000ff">
-                    Color <span>#0000ff</span>
-                    <a onclick="removeColor()" title="Remove This Color">&times;</a>
-                </p>
-            </div>
         </div>
     </div>
 </body>

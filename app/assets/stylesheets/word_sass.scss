@@ -1,7 +1,14 @@
+$bg-col: #94B4E4;
+$cntr-col: #C6D4E7;
+$text-col: #333;
+$cntr-margin: 10px;
+$cntr-pdg: 10px;
+
 body{
-    color: #000;
-    background-color: #aaa;
-}
+    color: $text-col;
+    background-color: $bg-col;
+    font-family: "Open Sans", "Sans Serif";
+}   
 
 label{
     &:after{
@@ -12,6 +19,9 @@ label{
     }
 }
 #unproc-container{
+    margin: $cntr-margin;
+    padding: $cntr-pdg;
+    background-color: $cntr-col;
     display: inline-block;
     width: 40%;
     textarea#unprocessed{
@@ -35,8 +45,21 @@ form{
     }
 }
 #aesthetics{
+    margin: $cntr-margin;
+    padding: $cntr-pdg;
+    background-color: $cntr-col;
+    width: 70%;
     #color-list{
+        line-height: 1;
+        p{
+            width: 20%;
+            padding: 4px;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            background-color: $bg-col;
+        }
         a{
+            float: right;
             cursor: pointer;
             color: #444;
             text-decoration: none;

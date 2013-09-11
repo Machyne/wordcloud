@@ -11,82 +11,80 @@
     <%= javascript_include_tag "application" %>
 </head>
 <body>
-    <div><!-- row -->
-        <div id="unproc-container">
-            <div>
-                <label class="above" for="unprocessed">Enter your text</label>
-                <textarea id="unprocessed"></textarea>
-            </div>
-            <span id="loading">Loading...</span>
-            <div>
-                <label for="file-uploader">Upload files</label>
-                <input type="file" id="file-uploader" name="files[]" multiple title="Uploader"/>
-                <button id="clear-button">Clear All Text</button>
-            </div>
-            <p>Tip: drag and drop a file to load it in!</p>
-            <div>
-                <span>Load from url:</span>
-                <input id="page-url" type="text" value="http://www.w3schools.com/"/>
-                <button id="load-page-button">Load</button>
-            </div>
-            <div>
-                <label for="normalize">Normalize</label>
-                <input type="checkbox" id="normalize" value="normalize"/>
-                <label for="normal">to</label>
-                <input id="normal" type="number" value="10" disabled="disabled" />
-                <button id="preprocess-button">Preprocess the text!</button>
-            </div>
-            <div class="fwc">
-                &nbsp;
-                <button id="cloud-go" disabled="disabled">Create the word cloud!</button>
-                &nbsp;
-                <form action="/export" method="post">
-                    <div style="margin:0;padding:0;display:inline;visibility:hidden">
-                        <input id="export-form-dim" name="dim" type="hidden" value="" />
-                        <input id="export-form-font" name="font" type="hidden" value="" />
-                        <input id="export-form-bgcol" name="bgcol" type="hidden" value="" />
-                        <input id="export-form-wordCloud" name="wordCloud" type="hidden" value="" />
-                    </div>
-                    <input name="export" disabled="disabled" id="export" type="submit" value="Save as PDF" />
-                </form>
-            </div>
+    <div id="cloud"></div>
+    <div id="unproc-container">
+        <div>
+            <label class="above" for="unprocessed">Enter your text</label>
+            <textarea id="unprocessed"></textarea>
         </div>
-        <div id="cloud"></div>
-        <div id="aesthetics">
-            <div>
-                <label for="font-input">Font</label>
-                <input id="font-input" type="text" value="Helvetica" />
-            </div>
-            <div>
-                <span>Dimmensions</span><br />
-                <label for="dim-w">W</label>
-                <input id="dim-w" type="number" value="600" />
-                <span>&times;</span>
-                <label for="dim-h">H</label>
-                <input id="dim-h" type="number" value="400" />
-            </div>
-            <div>
-                <label for="bg-color-picker">Background Color</label>
-                <input id="bg-color-picker" type="color" value="#000000" />
-                <br />
-                <label for="color-picker">Colors</label>
-                <input id="color-picker" type="color" value="#3BB077" />
-                <button id="add-color">Add</button>
-                <span id="color-list">
-                    <p class="color-ff0000" style="color:#ff0000">
-                        Color <span>#ff0000</span>
-                        <a onclick="removeColor()" title="Remove This Color">&times;</a>
-                    </p>
-                    <p class="color-00ff00" style="color:#00ff00">
-                        Color <span>#00ff00</span>
-                        <a onclick="removeColor()" title="Remove This Color">&times;</a>
-                    </p>
-                    <p class="color-0000ff" style="color:#0000ff">
-                        Color <span>#0000ff</span>
-                        <a onclick="removeColor()" title="Remove This Color">&times;</a>
-                    </p>
-                </span>
-            <div>
+        <span id="loading">Loading...</span>
+        <div>
+            <label for="file-uploader">Upload files</label>
+            <input type="file" id="file-uploader" name="files[]" multiple title="Uploader"/>
+            <button id="clear-button">Clear All Text</button>
+        </div>
+        <p>Tip: drag and drop a file to load it in!</p>
+        <div>
+            <span>Load from url:</span>
+            <input id="page-url" type="text" value="http://www.w3schools.com/"/>
+            <button id="load-page-button">Load</button>
+        </div>
+        <div>
+            <label for="normalize">Normalize</label>
+            <input type="checkbox" id="normalize" value="normalize"/>
+            <label for="normal">to</label>
+            <input id="normal" type="number" value="10" disabled="disabled" />
+            <button id="preprocess-button">Preprocess the text!</button>
+        </div>
+        <div class="fwc">
+            &nbsp;
+            <button id="cloud-go" disabled="disabled">Create the word cloud!</button>
+            &nbsp;
+            <form action="/export" method="post">
+                <div style="margin:0;padding:0;display:inline;visibility:hidden">
+                    <input id="export-form-dim" name="dim" type="hidden" value="" />
+                    <input id="export-form-font" name="font" type="hidden" value="" />
+                    <input id="export-form-bgcol" name="bgcol" type="hidden" value="" />
+                    <input id="export-form-wordCloud" name="wordCloud" type="hidden" value="" />
+                </div>
+                <input name="export" disabled="disabled" id="export" type="submit" value="Save as PDF" />
+            </form>
+        </div>
+    </div>
+    <div id="aesthetics">
+        <div>
+            <label for="font-input">Font</label>
+            <input id="font-input" type="text" value="Helvetica" />
+        </div>
+        <div>
+            <span>Dimmensions</span><br />
+            <label for="dim-w">W</label>
+            <input id="dim-w" type="number" value="600" />
+            <span>&times;</span>
+            <label for="dim-h">H</label>
+            <input id="dim-h" type="number" value="400" />
+        </div>
+        <div>
+            <label for="bg-color-picker">Background Color</label>
+            <input id="bg-color-picker" type="color" value="#000000" />
+            <br />
+            <label for="color-picker">Colors</label>
+            <input id="color-picker" type="color" value="#3BB077" />
+            <button id="add-color">Add</button>
+            <span id="color-list">
+                <p class="color-ff0000" style="color:#ff0000">
+                    Color <span>#ff0000</span>
+                    <a onclick="removeColor()" title="Remove This Color">&times;</a>
+                </p>
+                <p class="color-00ff00" style="color:#00ff00">
+                    Color <span>#00ff00</span>
+                    <a onclick="removeColor()" title="Remove This Color">&times;</a>
+                </p>
+                <p class="color-0000ff" style="color:#0000ff">
+                    Color <span>#0000ff</span>
+                    <a onclick="removeColor()" title="Remove This Color">&times;</a>
+                </p>
+            </span>
         </div>
     </div>
 </body>

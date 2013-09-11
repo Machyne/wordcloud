@@ -7,7 +7,7 @@ $dsbld-text-col: lighten($text-col, 20%);
 
 
 @mixin container-base{
-    margin: $cntr-margin 3%;
+    margin: $cntr-margin 3% 2*$cntr-margin 3%;
     padding: $cntr-pdg;
     border: 0px solid transparent;
     box-sizing: border-box;
@@ -16,6 +16,9 @@ $dsbld-text-col: lighten($text-col, 20%);
     display: inline-block;
     width: 45%;
     vertical-align: top;
+    div{
+        margin-bottom: 20px;
+    }
 }
 
 body{
@@ -37,6 +40,9 @@ label{
 input, button{
     font-family: "Open Sans", "Sans Serif";
     font-size: 0.9em;
+}
+input[type='file'] {
+    display: none;
 }
 
 input[type='submit'], input[type='color'], button{
@@ -87,13 +93,16 @@ input[type='number'] {
         height: 20em;
         resize: vertical;
     }
-    input[type='file'] {
-      width: 100px;
-    }
 }
 
 form{
     display: inline;
+}
+
+.tip{
+    font-style: italic;
+    font-size: .9em;
+    margin: 0;
 }
 
 #cloud{
@@ -112,9 +121,6 @@ form{
 #aesthetics{
     @include container-base;
     margin-left: 1%;
-    div{
-        margin-bottom: 20px;
-    }
     #color-list{
         line-height: 1;
         p{

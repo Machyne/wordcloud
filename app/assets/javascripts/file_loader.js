@@ -91,9 +91,6 @@ $(document).ready(function() {
         $('#loading').toggle(false);
         getWordHash(data.hash);
         $('#cloud-go').removeAttr('disabled');
-        $('html, body').animate({
-          scrollTop: $('#unprocessed').offset().top-10
-        }, 600);
       },
       error: function() {
         alert('fail');

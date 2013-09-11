@@ -16,14 +16,15 @@
         <div>
             <label class="above" for="unprocessed">Enter your text</label>
             <textarea id="unprocessed"></textarea>
+            <button id="clear-button">Clear All Text</button>
+            <span class="tip" id="loading">Loading...</span>
         </div>
-        <span id="loading">Loading...</span>
         <div>
             <label for="file-uploader">Upload files</label>
-            <input type="file" id="file-uploader" name="files[]" multiple title="Uploader"/>
-            <button id="clear-button">Clear All Text</button>
+            <button onclick="document.getElementById('file-uploader').click()">Choose Files</button>
+            <input id="file-uploader" type="file" name="files[]" multiple title="Uploader"/>
+            <p class="tip">Tip: drag and drop a file to load it in!</p>
         </div>
-        <p>Tip: drag and drop a file to load it in!</p>
         <div>
             <span>Load from url:</span>
             <input id="page-url" type="text" value="http://www.w3schools.com/"/>

@@ -111,10 +111,10 @@ $(window).ready(function (argument) {
     var col = $('#color-picker').val();
     var c = "<p class='color-"+col.substr(1)+"' style='color:"+col+"'>Color <span>"+col+"</span> <a onclick='removeColor()' title='Remove This Color'>&times;</a></p>";
     $('#color-list').append(c);
-    $('html, body').animate({
-      scrollTop: $('.color-'.concat(col.substr(1))).offset().top
-    }, 600);
   });
 
-  $('#cloud-go').on('click', renderCloud);
+  $('#cloud-go').on('click', function(){
+    $('html, body').animate({scrollTop: 0}, 900);
+    renderCloud()
+  });
 });

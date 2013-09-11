@@ -11,7 +11,7 @@
     <%= javascript_include_tag "application" %>
 </head>
 <body>
-    <div id="cloud"></div>
+    <div id="cloud-holder"><div id="cloud"></div></div>
     <div id="unproc-container">
         <div>
             <label class="above" for="unprocessed">Enter your text</label>
@@ -56,6 +56,7 @@
         <div>
             <label for="font-input">Font</label>
             <input id="font-input" type="text" value="Helvetica" />
+            <br /><span class="tip">*Note: currently, the only font that is supported for pdf export is Helvetica.</span>
         </div>
         <div>
             <span>Dimmensions</span><br />

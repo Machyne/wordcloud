@@ -12,7 +12,7 @@ var getWordHash = function(){
 
 function getFont(){
   return $('#font-input').val();
-}
+};
 
 function removeColor() {
   var p = $(event.currentTarget).parent();
@@ -20,14 +20,23 @@ function removeColor() {
   window.setTimeout(function(){p.remove();}, 600);
   event.cancelBubble = true;
   if (event.stopPropagation) { event.stopPropagation() };
-}
+};
 function getColors(){
   return $('#color-list p span').text().split('#').slice(1).map(function(c){return '#'.concat(c);});
-}
+};
 
 function getWCSize(){
   return [parseInt($('#dim-w').val()), parseInt($('#dim-h').val())];
-}
+};
+
+function removeWordCloud(){
+  $('#cloud').html('');
+  $('#export').attr('disabled','disabled');
+};
+function addWCRemover(){
+  var element = "<a onclick='removeWordCloud()' class='remover' title='Delete this cloud'>&times;</a>";
+  $('#cloud').append(element);
+};
 
 // Result:       {word}++{word}++...
 // {word}      = {*text},{style},{transform}
@@ -65,7 +74,6 @@ function prepareForm() {
   $('#export-form-wordCloud').val(allWords.join('++'));
   $('#export').removeAttr('disabled');
 };
-
 
 $(window).ready(function (argument) {
   function draw(data) {
@@ -115,6 +123,7 @@ $(window).ready(function (argument) {
 
   $('#cloud-go').on('click', function(){
     $('html, body').animate({scrollTop: 0}, 900);
-    renderCloud()
+    renderCloud();
+    addWCRemover();
   });
 });

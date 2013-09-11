@@ -2,7 +2,7 @@ class WordCloudController < ApplicationController
   require "lemmatizer"
   require "open-uri"
   require "nokogiri"
-  require "prawn"
+  require "pdfkit"
 
   def index
     render action: 'index.html.erb', :handlers => [:erb]
@@ -15,28 +15,22 @@ class WordCloudController < ApplicationController
 
   skip_before_filter :verify_authenticity_token
   def export
-    dim = params[:dim].split('x').map { |e| Integer(e) }
-    pdf = Prawn::Document.new(page_size: dim, margin: [0,0,0,0])
-    
-    pdf.fill_color params[:bgcol][1,6]
-    pdf.fill_rectangle [0, dim[1]], dim[0], dim[1]
-    
-    f = params[:font]
-    if fonts.include? f
-      pdf.font f
+    PDFKit.configure do |config|
+      config.default_options = {
+        :encoding => "UTF-8",
+        :page_width => params[:width],
+        :page_height => params[:height],
+        :margin_top => "0in",
+        :margin_right => "0in",
+        :margin_bottom => "0in",
+        :margin_left => "0in",
+        :disable_smart_shrinking => false
+        }
     end
-
-    dim = [dim[0]/2, dim[1]/2]
-    params[:wordCloud].split("++").each do |w|
-      text, styleTemp, transformTemp = w.split ","
-      color, fontSize = styleTemp.split "|"
-      fontSize = Integer(fontSize[/\d+/])
-      x, y, r = transformTemp.split "|"
-      r = 360 - Integer(r)
-      pdf.fill_color color[1, 6]
-      pdf.draw_text text, at: [Integer(x)+dim[0], dim[1]-Integer(y)], size: fontSize, rotate: r
-    end
-    send_data pdf.render, :filename => "Word Cloud.pdf", :type => "application/pdf", :disposition => "inline"
+    html = params[:wordCloud]
+    p html
+    pdf = PDFKit.new(html)
+    send_data pdf.to_pdf, :filename => "Word Cloud.pdf", :type => "application/pdf", :disposition => "inline"
   end
 
   skip_before_filter :verify_authenticity_token  
@@ -80,13 +74,6 @@ class WordCloudController < ApplicationController
   end
 
   private
-  def fonts
-    ['Courier', 'Helvetica', 'Times-Roman', 'Symbol', 'ZapfDingbats',
-     'Courier-Bold', 'Courier-Oblique', 'Courier-BoldOblique',
-     'Times-Bold', 'Times-Italic', 'Times-BoldItalic',
-     'Helvetica-Bold', 'Helvetica-Oblique', 'Helvetica-BoldOblique']
-  end
-
   def stops
     ['a', 'about', 'above', 'accordingly', 'across', 'after',
      'afterwards', 'again', 'against', 'all', 'allows', 'almost',

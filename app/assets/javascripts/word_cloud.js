@@ -29,35 +29,10 @@ function getWCSize(){
   return [parseInt($('#dim-w').val()), parseInt($('#dim-h').val())];
 }
 
-// Result:       {word}++{word}++...
-// {word}      = {*text},{style},{transform}
-// {style}     = {*color}|{*font size}
-// {transform} = {*x}|{*y}|{*rotation in degrees}
-//
 function prepareForm() {
-  $('#export-form-dim').val(getWCSize().join('x'));
-  $('#export-form-bgcol').val($('#bg-color-picker').val());
-  $('#export-form-font').val(getFont());
-  var allWords = [];
-  $('svg g text').each(function(){
-    var styleVal = this.attributes[1].value;
-    styleVal = styleVal.split(';');
-    styleVal = styleVal[0].split(': ')[1] + '|' + styleVal[2].split(': ')[1];
-    var transformVal = this.attributes[2].value;
-    transformVal = transformVal.match(/-?\d+/g);
-    transformVal[2] = transformVal[2]||'0';
-    var w = this.clientWidth;
-    if(transformVal[2]=='0' || transformVal[2]=='180'){
-      transformVal[0]-=Math.floor(w/2);
-    }else if(transformVal[2]=='90'){
-      transformVal[0]-=Math.floor(w/2);
-    }else if(transformVal[2]=='-90'){
-    };
-    transformVal = transformVal.join('|');
-    var contentVal = this.textContent;
-    allWords.push(contentVal.concat(',', styleVal, ',', transformVal));
-   });
-  $('#export-form-wordCloud').val(allWords.join('++'));
+  $('#export-form-wordCloud').val(document.documentElement.outerHTML);
+  $('#export-form-width').val(getWCSize()[0]);
+  $('#export-form-height').val(getWCSize()[1]);
   $('#export').removeAttr('disabled');
 };
 

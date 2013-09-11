@@ -17,18 +17,16 @@ class WordCloudController < ApplicationController
   def export
     PDFKit.configure do |config|
       config.default_options = {
-        :encoding => "UTF-8",
-        :page_width => params[:width],
-        :page_height => params[:height],
         :margin_top => "0in",
         :margin_right => "0in",
         :margin_bottom => "0in",
         :margin_left => "0in",
-        :disable_smart_shrinking => false
+        :minimum_font_size => 1,
+        :page_height => params[:height],
+        :page_width => params[:width]
         }
     end
     html = params[:wordCloud]
-    p html
     pdf = PDFKit.new(html)
     send_data pdf.to_pdf, :filename => "Word Cloud.pdf", :type => "application/pdf", :disposition => "inline"
   end

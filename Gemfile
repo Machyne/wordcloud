@@ -15,8 +15,8 @@ gem 'turbolinks', '1.1.1'
 gem 'jbuilder', '1.0.2'
 gem 'lemmatizer', '0.1.0'
 gem 'nokogiri', '1.6.0'
-gem 'pdfkit', '0.5.4'
-gem 'wkhtmltopdf-binary', '0.9.9.1'
+gem 'wkhtmltopdf-binary'
+gem 'pdfkit'
 
 group :doc do
   gem 'sdoc', '0.3.20', require: false

@@ -46,6 +46,13 @@ function prepareForm() {
     var transformVal = this.attributes[2].value;
     transformVal = transformVal.match(/-?\d+/g);
     transformVal[2] = transformVal[2]||'0';
+    var w = this.clientWidth;
+    if(transformVal[2]=='0' || transformVal[2]=='180'){
+      transformVal[0]-=Math.floor(w/2);
+    }else if(transformVal[2]=='90'){
+      transformVal[0]-=Math.floor(w/2);
+    }else if(transformVal[2]=='-90'){
+    };
     transformVal = transformVal.join('|');
     var contentVal = this.textContent;
     allWords.push(contentVal.concat(',', styleVal, ',', transformVal));

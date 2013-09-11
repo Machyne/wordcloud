@@ -1,28 +1,5 @@
-== README
+== WORD CLOUD
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a rails app for a word cloud generator. All texual preprocessing (including extraction from html) is done server side. The actual creation of the word cloud is done client side via D3. The pdf generation for export is accomplished with Prawn.
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+Hope you enjoy it! A live example can be found at [http://matt-word-cloud.herokuapp.com].

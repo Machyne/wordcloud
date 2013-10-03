@@ -179,3 +179,30 @@ form{
     width: 100%;
     text-align: center;
 }
+
+div.github{
+    $gh-border-col: #17336A;
+    background-color: #346C9D;
+    border-top: solid 2px $gh-border-col;
+    border-bottom: solid 2px $gh-border-col;
+    box-sizing: border-box;
+    position: fixed;
+    top: 35px;
+    right: -110px;
+    text-align: center;
+    width: 20em;
+    transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    a.github, a.github:hover, a.github:visited{
+        color: #161941;
+        width: 100%;
+        font-size: 11pt;
+        display: inline-block;
+        text-decoration: none;
+        margin: 4px 0;
+        padding: .15em 0;
+        border-top: dashed 1px $gh-border-col;
+        border-bottom: dashed 1px $gh-border-col;
+    }
+}

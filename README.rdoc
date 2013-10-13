@@ -2,4 +2,4 @@
 
 This is a rails app for a word cloud generator. All texual preprocessing (including extraction from html) is done server side. The actual creation of the word cloud is done client side via D3. The pdf generation for export is accomplished with Prawn.
 
-Hope you enjoy it! A live example can be found at [http://matt-word-cloud.herokuapp.com].
+Hope you enjoy it! A live example can be found at [http://wordcloud.mattwc.com].

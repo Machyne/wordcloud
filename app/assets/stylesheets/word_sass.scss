@@ -7,10 +7,10 @@ $dsbld-text-col: lighten($text-col, 20%);
 
 
 @mixin container-base{
+    box-sizing: border-box;
     margin: $cntr-margin 3% 2*$cntr-margin 3%;
     padding: $cntr-pdg;
     border: 0px solid transparent;
-    box-sizing: border-box;
     background-color: $cntr-col;
     color: $text-col;
     display: inline-block;
@@ -105,7 +105,26 @@ form{
     margin: 0;
 }
 
+#description{
+    box-sizing: border-box;
+    margin: 25px 3% 5px 3%;
+    border: solid 0px transparent;
+    width: 92.3%;
+    padding: 10px 30px;
+    padding-right: 45px;
+    background-color: $cntr-col;
+    color: $text-col;
+    position: relative;
+    a{
+        position: absolute;
+        cursor: pointer;
+        top: 10px;
+        left: 10px;
+    }
+}
+
 #cloud-holder{
+    display: none;
     margin: 0;
     border: solid 0px transparent;
     width: 100%;
@@ -181,12 +200,13 @@ form{
 }
 
 div.github{
+    z-index: 1;
     $gh-border-col: #17336A;
     background-color: #346C9D;
     border-top: solid 2px $gh-border-col;
     border-bottom: solid 2px $gh-border-col;
     box-sizing: border-box;
-    position: fixed;
+    position: absolute;
     top: 35px;
     right: -110px;
     text-align: center;

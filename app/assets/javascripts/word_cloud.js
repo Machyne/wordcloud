@@ -123,6 +123,7 @@ $(window).ready(function (argument) {
 
   $('#cloud-go').on('click', function(){
     $('html, body').animate({scrollTop: 0}, 900);
+    if($("#cloud-holder").is(":hidden")) $('#cloud-holder').toggle();
     renderCloud();
     addWCRemover();
   });

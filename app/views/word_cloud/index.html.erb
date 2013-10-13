@@ -12,6 +12,10 @@
 </head>
 <body>
     <div class="github"><a class="github" href="https://github.com/Machyne/wordcloud">View on GitHub</a></div>
+    <p id="description">
+        <a onclick="$('#description').remove()">&times;</a>
+        Welcome to my word cloud generator! First, fill the box below with text. Either type, load in html from a url, or upload from a text file. Next, preprocess the text, then create your word cloud! Enjoy :)
+    </p>
     <div id="cloud-holder"><div id="cloud"></div></div>
     <div id="unproc-container">
         <div>
@@ -60,7 +64,7 @@
             <br /><span class="tip">*Note: currently, the only font that is supported for pdf export is Helvetica.</span>
         </div>
         <div>
-            <span>Dimmensions</span><br />
+            <span>Dimensions</span><br />
             <label for="dim-w">W</label>
             <input id="dim-w" type="number" value="600" />
             <span>&times;</span>

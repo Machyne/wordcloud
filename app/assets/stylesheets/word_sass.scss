@@ -8,6 +8,7 @@ $dsbld-text-col: lighten($text-col, 20%);
 
 @mixin container-base{
     box-sizing: border-box;
+    -moz-box-sizing: border-box;
     margin: $cntr-margin 3% 2*$cntr-margin 3%;
     padding: $cntr-pdg;
     border: 0px solid transparent;
@@ -26,6 +27,7 @@ body{
     font-family: "Open Sans", "Sans Serif";
     margin: 0;
     padding: 0;
+    overflow-x: hidden;
 }   
 
 label{
@@ -83,6 +85,7 @@ input[type='number'] {
     margin-right: 1%;
     textarea#unprocessed{
         box-sizing: border-box;
+        -moz-box-sizing: border-box;
         color: $text-col;
         border: 1px solid lighten($text-col, 30%);
         background-color: lighten($cntr-col, 10%);
@@ -107,6 +110,7 @@ form{
 
 #description{
     box-sizing: border-box;
+    -moz-box-sizing: border-box;
     margin: 25px 3% 5px 3%;
     border: solid 0px transparent;
     width: 92.3%;
@@ -129,6 +133,7 @@ form{
     border: solid 0px transparent;
     width: 100%;
     box-sizing: border-box;
+    -moz-box-sizing: border-box;
     padding: 10px;
     text-align: center;
     svg{
@@ -199,6 +204,30 @@ form{
     text-align: center;
 }
 
+footer{
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    margin: 5px 3% 25px 3%;
+    border: solid 0px transparent;
+    width: 92.3%;
+    padding: $cntr-pdg;
+    background-color: $cntr-col;
+    color: $text-col;
+    text-align: center;
+    span{
+        letter-spacing: .35em;
+    }
+    a{
+        color: darken($bg-col, 45%);
+        text-decoration: none;
+        text-shadow:none;
+        &:hover{
+            color: darken($bg-col, 30%);
+            text-decoration: none;
+        }
+    }
+}
+
 div.github{
     z-index: 1;
     $gh-border-col: #17336A;
@@ -206,6 +235,7 @@ div.github{
     border-top: solid 2px $gh-border-col;
     border-bottom: solid 2px $gh-border-col;
     box-sizing: border-box;
+    -moz-box-sizing: border-box;
     position: absolute;
     top: 35px;
     right: -110px;
